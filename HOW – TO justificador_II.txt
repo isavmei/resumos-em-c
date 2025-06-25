@@ -1,0 +1,100 @@
+HOW – TO do programa 
+
+ 
+
+O programa recebe um número inteiro CASOS como entrada, que indica a quantidade de casos de teste (linhas) a serem processados. Para cada conjunto de CASOS ele lê as linhas de texto correspondentes. Em seguida, ele "limpa" cada linha, fazendo o seguinte: 
+
+Remove espaços em branco no início e no final da linha. 
+
+Substitui múltiplos espaços internos por um único espaço. 
+
+Remove quaisquer caracteres que não sejam letras ou espaços. 
+
+Finalmente, as linhas limpas são impressas, justificadas à direita, usando o comprimento da linha processada mais longa naquele conjunto de casos de teste. Esse processo se repete até que CASOS seja digitado como 0. 
+
+#include <stdio.h> // Para funções de entrada/saída como scanf e printf
+#include <string.h> // Para funções de manipulação de strings como strlen
+#include <stdbool.h> // Para o tipo booleano 'bool'
+#include <ctype.h> // Para funções de teste de caracteres como isalpha
+
+// Define uma estrutura para armazenar strings de entrada
+typedef struct {
+    char palavra[51]; // Array de caracteres para a palavra/linha (até 50 caracteres + null)
+} string;
+
+// Define uma estrutura para armazenar strings de saída processadas
+typedef struct {
+    char saida[51]; // Array de caracteres para a saída limpa
+} saida;
+
+void main() {
+    unsigned short casos; // Número de casos de teste (linhas) a serem processados
+    unsigned short aux, tam; // Variáveis auxiliares para controle de loops e dimensionamento
+    unsigned short maior = 0; // Armazena o comprimento da maior string de saída para justificação
+    unsigned short atual; // Comprimento da string atual
+    unsigned short i, j, k; // Índices para loops e manipulação de strings
+
+    // Loop principal: continua até que 'casos' seja 0
+    while (scanf("%hu", &casos), casos != 0) { // Lê 'casos' e verifica se é diferente de 0
+        aux = casos; // Guarda o valor original de 'casos'
+        tam = casos; // Guarda o valor para iterações finais
+
+        // Declara arrays de estruturas para armazenar as linhas de entrada e saída
+        string palavra[aux];    // Linhas de texto bruto
+        saida textoSaida[aux];  // Linhas de texto processado
+
+        // 1. Leitura das linhas de entrada
+        i = 0;
+        while (casos--) {
+            scanf(" %[^\n]", palavra[i++].palavra); // Lê cada linha, ignorando espaços iniciais
+        }
+
+        // 2. Processamento das linhas: remove espaços extras e caracteres não-letras
+        i = 0;
+        while (aux--) {
+            j = 0; // Índice da string de entrada
+            k = 0; // Índice da string de saída
+            while (true) {
+                // Copia letras consecutivas para a string de saída
+                while (isalpha(palavra[i].palavra[j])) {
+                    textoSaida[i].saida[k++] = palavra[i].palavra[j++];
+                }
+                // Se o fim da string de entrada for alcançado, para
+                if (palavra[i].palavra[j] == '\0') break;
+
+                // Avança sobre caracteres não-letras (múltiplos espaços, pontuações, etc.)
+                while (!isalpha(palavra[i].palavra[j])) {
+                    j++;
+                    if (palavra[i].palavra[j] == '\0') break; // Se o fim da string for alcançado
+                }
+                // Se o fim da string for alcançado após avançar, para
+                if (palavra[i].palavra[j] == '\0') break;
+
+                // Adiciona um único espaço entre as palavras na string de saída
+                textoSaida[i].saida[k++] = ' ';
+            }
+            textoSaida[i].saida[k] = '\0'; // Adiciona o terminador nulo à string de saída
+            i++; // Próxima linha de entrada/saída
+        }
+
+        // 3. Encontra o comprimento da maior string processada
+        maior = 0;
+        for (i = 0; i < tam; i++) {
+            atual = strlen(textoSaida[i].saida);
+            if (atual > maior) {
+                maior = atual;
+            }
+        }
+
+        // 4. Imprime as strings processadas, justificadas à direita
+        for (i = 0; i < tam; i++) {
+            printf("%*s\n", maior, textoSaida[i].saida); // %*s usa 'maior' para a largura do campo
+        }
+
+        // Adiciona uma linha em branco entre conjuntos de casos, se houver mais casos
+        if (casos != 0) { // Na verdade, este 'casos' já foi atualizado pelo próximo scanf no while
+            printf("\n"); // Esta condição será sempre falsa após a refatoração do loop
+                          // A linha em branco será controlada pelo 'scanf' no 'while'
+        }
+    }
+}
