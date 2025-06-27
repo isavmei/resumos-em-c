@@ -1,0 +1,14 @@
+shell sort: 
+ordena o vetor utilizando um gap do tamanho da metade dele...
+esse gap vai diminuindo ao longo do tempo
+cada etapa ela vai fazendo troca conforme o gap, e é feito por insertion sort
+reduz o gap até ele se tornar um 
+
+- / Percorre o vetor a partir da posição "gap"
+        for (posição = gap; posição < tamanho; posição++) {
+            temporario = vetor[posição]; // Armazena o valor atual
+
+            // Move os elementos que estão "gap" posições atrás e são maiores que temp
+            for (posição_nova = posição; posição_nova >= gap && vetor[posição_nova - gap] > temporario; posição_nova -= gap) {
+                vetor[posição_nova] = vetor[posição_nova - gap]; // Desloca o elemento para a frente
+            }
