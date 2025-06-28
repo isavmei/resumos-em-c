@@ -2,13 +2,22 @@ shell sort:
 ordena o vetor utilizando um gap do tamanho da metade dele...
 esse gap vai diminuindo ao longo do tempo
 cada etapa ela vai fazendo troca conforme o gap, e é feito por insertion sort
-reduz o gap até ele se tornar um 
+reduz o gap até ele se tornar um ...
 
 - / Percorre o vetor a partir da posição "gap"
-        for (posição = gap; posição < tamanho; posição++) {
+for (intervalo = tamanho / 2; intervalo > 0; intervalo /= 2) {
+        for (posição = intervalo; posição < tamanho; posição++) {
             temporario = vetor[posição]; // Armazena o valor atual
 
             // Move os elementos que estão "gap" posições atrás e são maiores que temp
-            for (posição_nova = posição; posição_nova >= gap && vetor[posição_nova - gap] > temporario; posição_nova -= gap) {
+            for (posição_nova = posição; posição_nova >= intervalo && vetor[posição_nova - intervalo] > temporario; posição_nova -= gap) {
                 vetor[posição_nova] = vetor[posição_nova - gap]; // Desloca o elemento para a frente
+                //enquanto dentro dos limites e houver maior valor que o atual, se move esse valor pra frente
+                //envia os maiores elementos que o atual (temporario) pra frente do vetor abrindo espaco pra inserir 
+                //o temporario no lugar correto de acordo com a distancia "intervalo". é como fazer insertion sort mas comparando 
+                //elementos por salto, não apenas lado a lado.
             }
+            vetor[posição_nova] = temporario; // Insere o elemento na posição correta
+        }
+    }
+}
