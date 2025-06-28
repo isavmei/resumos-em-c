@@ -1,0 +1,14 @@
+diferença de pontuação:
+Em C, tanto i++ quanto ++i servem para aumentar o valor da variável i em 1. A diferença entre eles está no momento em que o valor de i é usado durante a execução da expressão.
+
+O i++ é chamado de pós-incremento. Isso significa que o valor de i é usado primeiro, antes de ser incrementado. Já o ++i é chamado de pré-incremento, pois o valor de i é incrementado antes de ser usado.
+
+Por exemplo, se i vale 5:
+
+a = i++; atribui 5 a a e só depois incrementa i para 6.
+
+b = ++i; primeiro incrementa i para 6 e depois atribui esse valor (6) a b.
+
+Se o incremento é feito sozinho, como em i++; ou ++i; fora de uma atribuição, os dois funcionam da mesma forma — apenas aumentam i em 1. Mas quando estão dentro de uma expressão maior, a ordem faz diferença.
+
+Essa distinção é importante quando se usa essas expressões em chamadas de função, em operações mais complexas ou dentro de loops como for.
