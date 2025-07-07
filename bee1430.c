@@ -1,37 +1,45 @@
-#include <stdio.h>
-int soma_dos_valores(int notas[p]; int soma_valor)
- for (int contador = 0, contador < notas[p], contador++){
-     while notas != '/'{
-         for (int contagem
-     }
- }
+float nota(char c) {
+    switch (c) {
+        case 'W': return 1.0;
+        case 'H': return 0.5;
+        case 'Q': return 0.25;
+        case 'E': return 0.125;
+        case 'S': return 0.0625;
+        case 'T': return 0.03125;
+        case 'X': return 0.015625;
+        default: return 0.0;
+    }
+
+    //verifica qual nota foi lida 
+    // retorna 0.0 se não for uma nota válida;
+}
+
 int main() {
-    int W = 1;
-    int H = 1/2;
-    int Q = 1/4;
-    int E = 1/8;
-    int S = 1/16;
-    int T = 1/32;
-    int X = 1/64;
-    // a soma deve ser um 
-    int notas = [200];
-    
-    scanf("%c", &notas[p]);
-    int contador = 0;
-    //contar as notas
-    //somar as notas
-    //verificar se da um 
-    //se der um, somar.
-    
-    for (int contador = 0; contador < notas[p], contador++){
-        while (notas[p] != '/'){
-        soma = 0;
-        for (int contador2 = 0; contador2 < contador; contador2++) {
-            soma += vetor[contador2];
-        } if (soma == 1) {
-            valor_total 
+    char linha[210]; // um pouco maior que 200 para garantir segurança
+
+    while (fgets(linha, sizeof(linha), stdin)) {
+        if (linha[0] == '*') {
+            break; // fim da entrada
         }
+        //fgets le todos os algarismos do texto até o /0 final
+        //sizeof -> tamanho todo do vetor
+        //stdin -> ler do teclado quando ele digitar 
+
+        int corretos = 0;
+        float soma = 0.0;
+
+        for (int i = 1; linha[i] != '\0'; i++) {
+            if (linha[i] == '/') {
+                if (soma >= 0.999 && soma <= 1.001) {
+                    corretos++;
+                }
+                soma = 0.0; // começar a soma do próximo compasso
+            } else {
+                soma += nota(linha[i]);
+            }
         }
+
+        printf("%d\n", corretos);
     }
 
     return 0;
