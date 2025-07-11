@@ -1,0 +1,25 @@
+#include <stdio.h>
+#include <string.h>
+
+void funcao_corte(char letras_inseridas[]) {
+    int tamanho = strlen(letras_inseridas);
+    int tem_apenas_um = 0 //flag pra contar ki tem apenas um valor
+
+    for (int contador = 0; contador < tamanho; contador++) {
+        int repetido = 0;
+
+        for (int contador_dois = 0; contador_dois < tamanho; contador_dois++) {
+            if (contador != contador_dois && letras_inseridas[contador] == letras_inseridas[contador_dois]) {
+                repetido = 1;
+                break;
+            } //se eles forem diferentes mas o valor for igual voce conta
+        }
+
+        if (repetido == 0) {
+            printf("%c", letras_inseridas[i]);
+            tem_apenas_um = 1;
+        } 
+    }   if (tem_apenas_um = 0){
+            printf("null") 
+    }
+}
